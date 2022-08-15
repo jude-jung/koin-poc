@@ -1,21 +1,40 @@
 package com.example
 
-import io.ktor.server.routing.*
-import io.ktor.http.*
-import io.ktor.server.application.*
-import io.ktor.server.response.*
-import io.ktor.server.request.*
+import com.example.application.DemoAppService
+import com.example.di.testAppServiceModule
+import com.example.di.testDbConnectionModule
+import com.example.di.testRepositoryModule
+import com.example.di.testServiceModule
+import com.example.presentation.routing.rest.DemoRouting.demoRouting
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
-import kotlin.test.*
+import io.ktor.http.*
+import io.ktor.server.routing.*
 import io.ktor.server.testing.*
-import com.example.plugins.*
+import org.koin.core.context.startKoin
+import org.koin.test.KoinTest
+import org.koin.test.inject
+import kotlin.test.Test
+import kotlin.test.assertEquals
 
-class ApplicationTest {
+class ApplicationTest : KoinTest {
     @Test
     fun testRoot() = testApplication {
+        startKoin {
+            modules(
+                testAppServiceModule,
+                testServiceModule,
+                testRepositoryModule,
+                testDbConnectionModule
+            )
+        }
+
+        val demoAppService: DemoAppService by inject()
+
         application {
-            configureRouting()
+            routing {
+                demoRouting(demoAppService)
+            }
         }
         client.get("/").apply {
             assertEquals(HttpStatusCode.OK, status)
