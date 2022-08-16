@@ -9,6 +9,8 @@ import com.example.infra.db.DbConnection
 import com.example.infra.db.MySqlDbConnection
 import com.example.infra.db.PostgreSqlDbConnection
 import com.example.infra.repository.DemoRepositoryImpl
+import com.typesafe.config.ConfigFactory
+import io.ktor.server.config.*
 import org.koin.core.module.dsl.bind
 import org.koin.core.module.dsl.named
 import org.koin.core.module.dsl.singleOf
@@ -33,12 +35,16 @@ val testRepositoryModule = module {
 }
 
 val testDbConnectionModule = module {
-    singleOf(::MySqlDbConnection) withOptions {
+    single { MySqlDbConnection.load(get()) } withOptions {
         named(mySqlDbConnection)
         bind<DbConnection>()
     }
-    singleOf(::PostgreSqlDbConnection) withOptions {
+    single { PostgreSqlDbConnection.load(get()) } withOptions {
         named(postgresqlDbConnection)
         bind<DbConnection>()
     }
+}
+
+val testConfigModule = module {
+    single { HoconApplicationConfig(ConfigFactory.load()) } bind ApplicationConfig::class
 }

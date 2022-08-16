@@ -1,10 +1,7 @@
 package com.example
 
 import com.example.application.DemoAppService
-import com.example.di.appServiceModule
-import com.example.di.dbConnectionModule
-import com.example.di.repositoryModule
-import com.example.di.serviceModule
+import com.example.di.*
 import com.example.presentation.routing.rest.DemoRouting.demoRouting
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
@@ -20,7 +17,8 @@ fun main() {
                 appServiceModule,
                 serviceModule,
                 repositoryModule,
-                dbConnectionModule
+                dbConnectionModule,
+                configModule
             )
         }
 

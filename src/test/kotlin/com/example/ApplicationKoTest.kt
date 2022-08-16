@@ -1,10 +1,7 @@
 package com.example
 
 import com.example.application.DemoAppService
-import com.example.di.testAppServiceModule
-import com.example.di.testDbConnectionModule
-import com.example.di.testRepositoryModule
-import com.example.di.testServiceModule
+import com.example.di.*
 import com.example.presentation.routing.rest.DemoRouting.demoRouting
 import io.kotest.core.extensions.Extension
 import io.kotest.core.spec.style.FreeSpec
@@ -30,7 +27,8 @@ class ApplicationKoTest : FreeSpec(), KoinTest {
                     testAppServiceModule,
                     testServiceModule,
                     testRepositoryModule,
-                    testDbConnectionModule
+                    testDbConnectionModule,
+                    testConfigModule
                 )
             )
         )
