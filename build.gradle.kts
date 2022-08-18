@@ -42,6 +42,7 @@ dependencies {
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
     // Koin Test features
     testImplementation("io.insert-koin:koin-test:$koin_version")
+    testImplementation("io.insert-koin:koin-test-junit4:$koin_version")
     testImplementation("io.kotest:kotest-runner-junit5:$kotest_version")
     // Kotest Koin
     testImplementation("io.kotest.extensions:kotest-extensions-koin:${kotestKoin_version}")

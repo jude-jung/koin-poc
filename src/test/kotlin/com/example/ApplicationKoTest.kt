@@ -6,6 +6,7 @@ import com.example.presentation.routing.rest.DemoRouting.demoRouting
 import io.kotest.core.extensions.Extension
 import io.kotest.core.spec.style.FreeSpec
 import io.kotest.koin.KoinExtension
+import io.kotest.koin.KoinLifecycleMode
 import io.ktor.client.*
 import io.ktor.client.engine.cio.*
 import io.ktor.client.plugins.*
@@ -29,7 +30,8 @@ class ApplicationKoTest : FreeSpec(), KoinTest {
                     testRepositoryModule,
                     testDbConnectionModule,
                     testConfigModule
-                )
+                ),
+                mode = KoinLifecycleMode.Root
             )
         )
     }
@@ -37,13 +39,11 @@ class ApplicationKoTest : FreeSpec(), KoinTest {
     init {
         "Application E2E Test" - {
             val demoAppService: DemoAppService by inject()
-            val server by lazy {
-                embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
-                    routing {
-                        demoRouting(demoAppService)
-                    }
+            val server = embeddedServer(Netty, port = 8080, host = "0.0.0.0") {
+                routing {
+                    demoRouting(demoAppService)
                 }
-            }
+            }.start(false)
             val client = HttpClient(CIO) {
                 defaultRequest {
                     port = 8080
@@ -52,7 +52,6 @@ class ApplicationKoTest : FreeSpec(), KoinTest {
             }
 
             "Hello API Test" {
-                server.start(false)
                 client.get("/").apply {
                     assertEquals(HttpStatusCode.OK, status)
                     assertEquals("Hello World!", bodyAsText())
