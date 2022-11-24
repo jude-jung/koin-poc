@@ -1,12 +1,16 @@
 package com.example
 
 import com.example.application.DemoAppService
-import com.example.di.*
+import com.example.di.appServiceModule
+import com.example.di.configModule
+import com.example.di.dbConnectionModule
+import com.example.di.repositoryModule
+import com.example.di.serviceModule
 import com.example.presentation.routing.rest.DemoRouting.demoRouting
-import io.ktor.server.application.*
-import io.ktor.server.engine.*
-import io.ktor.server.netty.*
-import io.ktor.server.routing.*
+import io.ktor.server.application.install
+import io.ktor.server.engine.embeddedServer
+import io.ktor.server.netty.Netty
+import io.ktor.server.routing.routing
 import org.koin.ktor.ext.inject
 import org.koin.ktor.plugin.Koin
 
@@ -29,5 +33,6 @@ fun main() {
         }
 
     }.start(wait = true)
+
 
 }
