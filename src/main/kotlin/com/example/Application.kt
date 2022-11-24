@@ -50,3 +50,7 @@ fun developTest() {
     // release 수정
     // develop 수정
 }
+
+fun release1_0_6() {
+    val stringValue = "Modified Test Value"
+}
