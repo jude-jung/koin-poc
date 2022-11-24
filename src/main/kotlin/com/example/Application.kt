@@ -52,7 +52,5 @@ fun developTest() {
 }
 
 fun release1_0_6() {
-    val stringValue = "Test Value"
-
-    println(stringValue)
+    val stringValue = "Modified Test Value"
 }
