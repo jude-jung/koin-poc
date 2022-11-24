@@ -48,7 +48,7 @@ fun test() {
 
 fun developTest() {
     // release 수정
-    // develop 수정
+    // develop 수정 1
 }
 
 fun release1_0_6() {
