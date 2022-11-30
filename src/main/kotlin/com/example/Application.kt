@@ -44,6 +44,7 @@ fun test() {
     // hotfix 수정
     // release commit
     // release commit
+    // release commit
 }
 
 fun developTest() {
