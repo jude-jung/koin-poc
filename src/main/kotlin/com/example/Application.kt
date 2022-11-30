@@ -48,6 +48,7 @@ fun developTest() {
     // release 수정
     // develop 수정 1
     // release 1.0.8
+    // develop commit
 }
 
 fun release1_0_6() {
