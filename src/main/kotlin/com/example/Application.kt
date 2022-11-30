@@ -43,12 +43,15 @@ fun main() {
 fun test() {
     // hotfix 수정
     // release commit
+    // release commit
+    // release commit
 }
 
 fun developTest() {
     // release 수정
     // develop 수정 1
     // release 1.0.8
+    // develop commit
     // develop commit
 }
 
